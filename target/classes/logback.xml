@@ -1,0 +1,31 @@
+<!--This XML is not mine. Authors: Ceki Gülcü, Sébastien Pennec, Carl Harris  -->
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level [%thread] %logger{36}:%L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>CriticalRecordsOnly.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level [%thread] %logger{36}:%L - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="LoggerJam">
+        <appender-ref ref="FILE" />
+    </logger>
+
+   <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
