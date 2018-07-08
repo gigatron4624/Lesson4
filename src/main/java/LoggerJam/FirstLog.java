@@ -5,7 +5,9 @@
  * DEBUG: default level
  * INFO
  * WARN
- * ERROR: most severe (bottom of hierarchy*/
+ * ERROR: most severe (bottom of hierarchy)
+ * This program uses the SLF4J interface to generate logs. Error logs alone are printed to a file. All logs are
+ * printed to the console. */
 
 package LoggerJam;
 
@@ -22,25 +24,25 @@ public class FirstLog {
 
         Logger timber = LoggerFactory.getLogger(FirstLog.class); // instantiate logger
 
+        // check if root logger level is at or above DEBUG (i.e. the default root logger level)
+        if (timber.isDebugEnabled()){
+            timber.debug("That's more like it."); // print DEBUG message to console
+        }
+
+        // check if root logger level is at or above INFO
+        if (timber.isInfoEnabled()){
+            timber.info("Now it's worse."); // print INFO message to console
+        }
+
         // check if root logger level is at or above ERROR on the hierarchy
         if (timber.isErrorEnabled()){
-            timber.error("Go suck an egg! - Lethal Weapon 5"); // print ERROR message to console
+            timber.error("I have four words: Go suck an egg!"); // print ERROR message to console
             // Note: The error message also appears in a separate log file.
         }
 
         // check if root logger level is at or above WARN
         if (timber.isWarnEnabled()){
-            timber.warn("Achtung baby! - U2"); // print WARN message to console
-        }
-
-        // check if root logger level is at or above INFO
-        if (timber.isInfoEnabled()){
-            timber.info("Now it's better!"); // print INFO message to console
-        }
-
-        // check if root logger level is at or above DEBUG (i.e. the default root logger level)
-        if (timber.isDebugEnabled()){
-            timber.debug("That's more like it."); // print DEBUG message to console
+            timber.warn("Achtung! That's German for warning."); // print WARN message to console
         }
 
         // check if root logger level is at TRACE; skip if below TRACE on the hierarchy
