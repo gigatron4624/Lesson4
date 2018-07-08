@@ -1,6 +1,6 @@
-/** This is another experimental program that churns out logs using the Logback interface. The code first sets the root
- * logger level to ERROR and programmatically adjusts the root logger level. The code prints all messages to the
- * console but only error messages to a separate log file.*/
+/** This is another experimental program that churns out logs using the Logback interface in addition to the SLF4J
+ * interface . The code first sets the root logger level to ERROR and programmatically adjusts the root logger level.
+ * The code prints all messages to the console but only error messages to a separate log file. */
 
 package LoggerJam;
 
