@@ -1,5 +1,5 @@
 /** The purpose of this code is to print Logback records to the console in the following order: debug, info, and error.
- * The error message is also exported to a log file. */
+ * The error message is also exported to a log file. Unlike First Log, Third Log is more Logback-dependent. */
 
 package LoggerJam;
 
