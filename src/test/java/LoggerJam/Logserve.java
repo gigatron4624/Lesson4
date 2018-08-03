@@ -6,7 +6,10 @@ package LoggerJam;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Logserve {
@@ -23,6 +26,28 @@ public class Logserve {
     private boolean eureka(String fn){
         File lwif = new File(fn); // lwif = look what I found!
         return lwif.exists(); // Eureka! I found the file!
+    }
+
+    /** firstline reads the first line of a file and stores it as a string
+     * @param fn is the name of the file (fn = filename)
+     * @return the first line of the file
+     * @throws IOException if the file is restricted (i.e. can't open or read file contents) */
+    private String firstline(String fn) throws IOException{
+        // pull file contents
+        StringBuilder pull = new StringBuilder(); // initialize blank string builder
+
+        // Attempting to read the target file might throw a File Not Found Exception.
+        try{
+            BufferedReader rfl = new BufferedReader(new FileReader(fn)); // rf: read file
+            pull.append(rfl.readLine());
+        }
+
+        // The file that is being accessed is either absent or a directory.
+        catch (FileNotFoundException ouch){
+            // The read function cannot read a directory or empty space.
+            return "File not found! Searching oblivion is forbidden sucker! " + ouch.getMessage();
+        }
+        return pull.toString(); // this is the first line
     }
 
     /* Assertion Tests */
@@ -44,10 +69,10 @@ public class Logserve {
     }
 
     @Test(dependsOnMethods = {"hollow"})
-    void errorexclusive(){
+    void errorexclusive() throws IOException{
         String efll = "ERROR"; // efll = effective logger level
-        File lf = new File("CriticalRecordsOnly.log");
-        String tll = "ERROR"; // tll = true logger level
+        String fl = firstline("CriticalRecordsOnly.log"); // fl = firstline
+        String tll = fl.substring(24,29); // tll = true logger level
         Assert.assertEquals(tll, efll, boo());
     }
 }
